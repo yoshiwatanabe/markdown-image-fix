@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
@@ -28,11 +27,8 @@ namespace MarkdownImageFix
         public string Convert(string source)
         {
             var results = regex.Matches(source);
-
             var builder = new StringBuilder(source);           
-
             var items = results.Select(async _ => (OldValue: _.Value, NewValue: await GetImageTag(_.Groups[2].Value)));
-
             foreach (var item in items)
             {
                 builder.Replace(item.Result.OldValue, item.Result.NewValue);
@@ -53,7 +49,6 @@ namespace MarkdownImageFix
             {
                 return (int) Math.Round(image.Width * scalingFactor);
             }
-
         }
     }
 }
